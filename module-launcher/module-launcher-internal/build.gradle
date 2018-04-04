@@ -1,0 +1,81 @@
+apply plugin: 'com.android.library'
+
+// -------------------------------------------------------------------------------------------------
+// Android
+// -------------------------------------------------------------------------------------------------
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        consumerProguardFiles 'proguard-rules.pro'
+
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions(androidLintOptions)
+}
+
+// -------------------------------------------------------------------------------------------------
+// Dependencies
+// -------------------------------------------------------------------------------------------------
+
+dependencies {
+    if (isAndroidPlugin3Enabled) {
+        /**
+         * Jars.
+         */
+        api fileTree(include: ['*.jar'], dir: 'libs')
+        implementation dep.libAppcompatV7
+        implementation dep.libConstraint
+        /**
+         * Libraries (Local).
+         */
+        implementation dep.libUtil
+        implementation dep.libModules
+        /**
+         * Modules.
+         */
+        implementation dep.moduleLauncherApi
+        implementation dep.moduleLauncherSdk
+        implementation dep.moduleClientsApi
+        implementation dep.moduleClientsSdk
+        implementation dep.moduleMessageApi
+        implementation dep.moduleMessageSdk
+        implementation dep.moduleAccountApi
+        implementation dep.moduleAccountSdk
+        return
+    }
+
+    /**
+     * Jars.
+     */
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile dep.libAppcompatV7
+    compile dep.libConstraint
+    /**
+     * Libraries (Local).
+     */
+    compile dep.libUtil
+    compile dep.libModules
+    /**
+     * Modules.
+     */
+    compile dep.moduleLauncherApi
+    compile dep.moduleLauncherSdk
+    compile dep.moduleClientsApi
+    compile dep.moduleClientsSdk
+    compile dep.moduleMessageApi
+    compile dep.moduleMessageSdk
+    compile dep.moduleAccountApi
+    compile dep.moduleAccountSdk
+}

@@ -1,0 +1,2 @@
+-keep public cbp.launcher.activity.MainActivity { *; }
+-keep public cbp.launcher.activity.MultiDexActivity { *; }

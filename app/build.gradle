@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId androidApplicationId
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode androidVersionCode
+        versionName androidVersionName
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            multiDexKeepProguard file('proguard-rules-multidex.pro')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+}
+
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex' // enable multidex
+
+        // optional
+        // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+    }
+}
+
+
+dependencies {
+    if (isAndroidPlugin3Enabled) {
+        /**
+         * Jars.
+         */
+        api fileTree(include: ['*.jar'], dir: 'libs')
+        /**
+         * Libraries (Android Support).
+         */
+        implementation dep.libMultiDex
+        implementation dep.libAppcompatV7
+        /**
+         * Libraries (Local).
+         */
+        implementation dep.libUtil
+        implementation dep.libModules
+        /**
+         * Libraries (Module).
+         */
+        implementation dep.moduleLauncherInternal
+        implementation dep.moduleClientsInternal
+        implementation dep.moduleMessageInternal
+        implementation dep.moduleAccountInternal
+        return
+    }
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    /**
+     * Libraries (Android Support).
+     */
+    compile dep.libMultiDex
+    compile dep.libAppcompatV7
+    /**
+     * Libraries (Local).
+     */
+    compile dep.libUtil
+    compile dep.libModules
+    /**
+     * Libraries (Module).
+     */
+    compile dep.moduleLauncherInternal
+    compile dep.moduleClientsInternal
+    compile dep.moduleMessageInternal
+    compile dep.moduleAccountInternal
+}

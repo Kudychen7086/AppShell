@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <shape>
+            <solid android:color="@color/color_bar_background_pressed" />
+            <stroke android:width="1px" android:color="@color/color_bar_edge_pressed" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/color_bar_background_pressed" />
+            <stroke android:width="1px" android:color="@color/color_bar_edge_pressed" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/color_bar_background_default" />
+            <stroke android:width="1px" android:color="@color/color_bar_edge_default" />
+        </shape>
+    </item>
+
+</selector>

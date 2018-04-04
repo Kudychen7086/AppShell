@@ -1,0 +1,3 @@
+include ':module-launcher-api',
+        ':module-launcher-internal',
+        ':module-launcher-sdk'

@@ -1,0 +1,3 @@
+include ':module-message-api',
+        ':module-message-internal',
+        ':module-message-sdk'

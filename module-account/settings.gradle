@@ -1,0 +1,3 @@
+include ':module-account-api',
+        ':module-account-internal',
+        ':module-account-sdk'

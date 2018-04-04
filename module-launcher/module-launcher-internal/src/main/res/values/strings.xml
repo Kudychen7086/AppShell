@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">module-launcher</string>
+    <string name="text_tab_home">首页</string>
+    <string name="text_tab_clients">客户</string>
+    <string name="text_tab_messages">消息</string>
+    <string name="text_tab_mine">我</string>
+</resources>

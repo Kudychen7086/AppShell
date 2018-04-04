@@ -1,0 +1,80 @@
+import java.text.SimpleDateFormat
+
+def supportLibrariesVersion = '26.1.0'
+
+static def releaseTime() {
+    return new SimpleDateFormat('YYYY-MM-dd HH:mm').format(new Date()).toString()
+}
+
+static def getGitVersion() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def isAndroidPlugin3Supported() {
+    return VersionNumber.parse(gradle.gradleVersion) >= VersionNumber.parse('4.1')
+}
+
+ext {
+    isCi = 'true' == System.getenv('ANDROID_CI')
+
+    isAndroidPlugin3Enabled = !isCi && isAndroidPlugin3Supported()
+    if (isAndroidPlugin3Enabled) {
+        println '***************************************************************'
+        println 'Android Plugin for Gradle 3.0.0 Enabled'
+        println '***************************************************************'
+    }
+
+    androidApplicationId = 'com.cbp.appshell'
+    androidVersionCode = 100000
+    androidVersionName = '1.0'
+
+    buildTime = releaseTime()
+    gitVersion = getGitVersion()
+
+    androidCompileSdkVersion = 26
+    androidBuildToolsVersion = '26.0.2'
+
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 26
+
+    androidLintOptions = {
+        abortOnError false
+        ignoreWarnings true
+        disable 'GradleDependency'
+    }
+
+    dep = [
+            /**
+             * Libraries (Android Support).
+             */
+            libMultiDex           : "com.android.support:multidex:1.0.3",
+            libConstraint         : "com.android.support.constraint:constraint-layout:1.0.2",
+            libAppcompatV7        : "com.android.support:appcompat-v7:$supportLibrariesVersion",
+            libSupportV4          : "com.android.support:support-v4:$supportLibrariesVersion",
+
+            /**
+             * Libraries (Local).
+             */
+            libUtil               : project(':lib-util'),
+            libModules            : project(':lib-modules'),
+
+            /**
+             * Libraries (Modules).
+             */
+            moduleLauncherApi     : project(':module-launcher:module-launcher-api'),
+            moduleLauncherInternal: project(':module-launcher:module-launcher-internal'),
+            moduleLauncherSdk     : project(':module-launcher:module-launcher-sdk'),
+
+            moduleClientsApi      : project(':module-clients:module-clients-api'),
+            moduleClientsInternal : project(':module-clients:module-clients-internal'),
+            moduleClientsSdk      : project(':module-clients:module-clients-sdk'),
+
+            moduleMessageApi      : project(':module-message:module-message-api'),
+            moduleMessageInternal : project(':module-message:module-message-internal'),
+            moduleMessageSdk      : project(':module-message:module-message-sdk'),
+
+            moduleAccountApi      : project(':module-account:module-account-api'),
+            moduleAccountInternal : project(':module-account:module-account-internal'),
+            moduleAccountSdk      : project(':module-account:module-account-sdk')
+    ]
+}

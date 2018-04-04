@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_bar_background_pressed">#F6F6F6</color>
+    <color name="color_bar_edge_pressed">#F1F1F1</color>
+    <color name="color_bar_background_default">#FFFF</color>
+    <color name="color_bar_edge_default">#FFF1F1F1</color>
+    <color name="color_tab_text_default">#FAAA</color>
+    <color name="color_tab_text_pressed">#FFFA5558</color>
+</resources>
