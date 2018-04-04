@@ -26,7 +26,7 @@ public class MessageModule extends Module {
             }
         });
         // navigators.
-        registerNavigator(ModuleConstants.MODULE_ACCOUNT, new MessageNavigator());
+        registerNavigator(ModuleConstants.MODULE_MESSAGE, new MessageNavigator());
     }
 
     private static class MessageNavigator implements Navigator {

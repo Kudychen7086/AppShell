@@ -1,19 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        consumerProguardFiles 'proguard-rules.pro'
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
     }
+
 
     buildTypes {
         release {
@@ -22,10 +19,20 @@ android {
         }
     }
 
+    lintOptions(androidLintOptions)
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    if (isAndroidPlugin3Enabled) {
+        /**
+         * Jars.
+         */
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        return
+    }
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    /**
+     * Jars.
+     */
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }

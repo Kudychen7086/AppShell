@@ -26,7 +26,7 @@ public class ClientsModule extends Module {
             }
         });
         // navigators.
-        registerNavigator(ModuleConstants.MODULE_ACCOUNT, new MessageNavigator());
+        registerNavigator(ModuleConstants.MODULE_CLIENTS, new MessageNavigator());
     }
 
     private static class MessageNavigator implements Navigator {
